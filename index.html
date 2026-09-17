@@ -1,139 +1,2175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Shadma Masarin | Premium Portfolio</title>
-  <meta name="description"
-    content="Shadma Masarin – WordPress Developer & Web Designer with 9+ years experience building premium websites and modern UI systems." />
+<title>Shadma — Web Designer & Developer</title>
 
-  <link rel="stylesheet" href="style.css" />
+<meta name="description" content="Shadma is a freelance Web Designer & Developer creating high-performance WordPress, WooCommerce and digital experiences for ambitious businesses.">
 
-  <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*,
+*::before,
+*::after{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:auto;
+}
+
+body{
+    background:#080808;
+    color:#f2f0eb;
+    font-family:"Inter",sans-serif;
+    overflow-x:hidden;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button{
+    font:inherit;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root{
+    --bg:#080808;
+    --white:#f2f0eb;
+    --muted:#929292;
+    --line:rgba(255,255,255,.13);
+    --accent:#d8ff45;
+    --card:#111111;
+    --mono:"DM Mono",monospace;
+}
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+::selection{
+    background:var(--accent);
+    color:#000;
+}
+
+.container{
+    width:min(1400px, calc(100% - 60px));
+    margin:auto;
+}
+
+.mono{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+}
+
+.muted{
+    color:var(--muted);
+}
+
+.section{
+    padding:150px 0;
+    position:relative;
+}
+
+.section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:40px;
+    margin-bottom:90px;
+}
+
+.section-number{
+    color:var(--accent);
+}
+
+.section-title{
+    font-size:clamp(48px,7vw,110px);
+    line-height:.9;
+    letter-spacing:-.07em;
+    font-weight:700;
+}
+
+.section-intro{
+    max-width:380px;
+    color:#a5a5a5;
+    font-size:15px;
+    line-height:1.7;
+}
+
+/* =========================================================
+   CURSOR
+========================================================= */
+
+.cursor{
+    position:fixed;
+    width:12px;
+    height:12px;
+    border:1px solid var(--accent);
+    border-radius:50%;
+    pointer-events:none;
+    z-index:9999;
+    transform:translate(-50%,-50%);
+    mix-blend-mode:difference;
+    transition:
+        width .25s ease,
+        height .25s ease,
+        background .25s ease;
+}
+
+.cursor.active{
+    width:55px;
+    height:55px;
+    background:var(--accent);
+}
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+.loader{
+    position:fixed;
+    inset:0;
+    background:#080808;
+    z-index:10000;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    padding:40px;
+}
+
+.loader-counter{
+    font-size:clamp(70px,14vw,200px);
+    font-weight:700;
+    letter-spacing:-.08em;
+}
+
+.loader-status{
+    font-family:var(--mono);
+    font-size:11px;
+    color:#888;
+}
+
+/* =========================================================
+   NAV
+========================================================= */
+
+.nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    padding:24px 0;
+    mix-blend-mode:difference;
+}
+
+.nav-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:18px;
+    font-weight:700;
+    letter-spacing:-.04em;
+}
+
+.logo span{
+    color:var(--accent);
+}
+
+.nav-links{
+    display:flex;
+    gap:35px;
+    font-family:var(--mono);
+    font-size:10px;
+    text-transform:uppercase;
+}
+
+.nav-links a{
+    position:relative;
+}
+
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    bottom:-6px;
+    left:0;
+    width:0;
+    height:1px;
+    background:var(--accent);
+    transition:.3s;
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+.nav-cta{
+    border:1px solid rgba(255,255,255,.4);
+    padding:10px 17px;
+    font-family:var(--mono);
+    font-size:10px;
+    text-transform:uppercase;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    min-height:100svh;
+    display:flex;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero-grid{
+    position:absolute;
+    inset:0;
+    opacity:.12;
+    background-image:
+        linear-gradient(rgba(255,255,255,.25) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.25) 1px,transparent 1px);
+    background-size:80px 80px;
+    mask-image:linear-gradient(to bottom,black,transparent);
+}
+
+.hero-orb{
+    position:absolute;
+    width:45vw;
+    height:45vw;
+    right:-15vw;
+    top:15%;
+    border-radius:50%;
+    background:
+        radial-gradient(circle,
+        rgba(216,255,69,.2),
+        rgba(216,255,69,.04) 35%,
+        transparent 70%);
+    filter:blur(20px);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    width:100%;
+}
+
+.hero-small{
+    margin-bottom:35px;
+    color:var(--accent);
+}
+
+.hero-title{
+    font-size:clamp(70px,12.5vw,190px);
+    line-height:.78;
+    letter-spacing:-.09em;
+    font-weight:700;
+    max-width:1250px;
+}
+
+.hero-title .outline{
+    color:transparent;
+    -webkit-text-stroke:1px rgba(255,255,255,.65);
+}
+
+.hero-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-top:70px;
+    gap:30px;
+}
+
+.hero-description{
+    max-width:420px;
+    font-size:15px;
+    line-height:1.7;
+    color:#aaa;
+}
+
+.scroll-indicator{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    font-family:var(--mono);
+    font-size:10px;
+}
+
+.scroll-line{
+    width:80px;
+    height:1px;
+    background:var(--line);
+    position:relative;
+    overflow:hidden;
+}
+
+.scroll-line::after{
+    content:"";
+    position:absolute;
+    width:35%;
+    height:100%;
+    background:var(--accent);
+    animation:scrollline 1.5s infinite ease-in-out;
+}
+
+@keyframes scrollline{
+    0%{left:-40%}
+    100%{left:100%}
+}
+
+/* =========================================================
+   MARQUEE
+========================================================= */
+
+.marquee{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+    padding:20px 0;
+}
+
+.marquee-track{
+    display:flex;
+    width:max-content;
+    animation:marquee 25s linear infinite;
+}
+
+.marquee-item{
+    font-size:14px;
+    font-family:var(--mono);
+    text-transform:uppercase;
+    padding:0 35px;
+    white-space:nowrap;
+}
+
+.marquee-item span{
+    color:var(--accent);
+    margin-left:35px;
+}
+
+@keyframes marquee{
+    to{
+        transform:translateX(-50%);
+    }
+}
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about-layout{
+    display:grid;
+    grid-template-columns:1fr 1.5fr;
+    gap:100px;
+}
+
+.about-big{
+    font-size:clamp(30px,4vw,60px);
+    line-height:1.05;
+    letter-spacing:-.05em;
+}
+
+.about-big span{
+    color:#555;
+}
+
+.about-copy{
+    max-width:650px;
+    color:#999;
+    line-height:1.8;
+    font-size:15px;
+}
+
+.about-copy p + p{
+    margin-top:25px;
+}
+
+.about-stats{
+    margin-top:70px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    border-top:1px solid var(--line);
+}
+
+.stat{
+    padding:25px 20px 25px 0;
+    border-right:1px solid var(--line);
+}
+
+.stat:last-child{
+    border-right:0;
+    padding-left:20px;
+}
+
+.stat-number{
+    font-size:42px;
+    letter-spacing:-.06em;
+}
+
+.stat-label{
+    margin-top:8px;
+    color:#777;
+    font-family:var(--mono);
+    font-size:9px;
+    text-transform:uppercase;
+}
+
+/* =========================================================
+   WORK
+========================================================= */
+
+.work{
+    overflow:hidden;
+}
+
+.projects{
+    display:flex;
+    gap:30px;
+    width:max-content;
+}
+
+.project{
+    width:min(70vw,900px);
+    flex-shrink:0;
+}
+
+.project-image{
+    aspect-ratio:16/10;
+    background:#151515;
+    overflow:hidden;
+    position:relative;
+}
+
+.project-image::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(120deg,transparent 20%,rgba(216,255,69,.12),transparent 70%);
+    transform:translateX(-100%);
+    transition:1s;
+}
+
+.project:hover .project-image::after{
+    transform:translateX(100%);
+}
+
+.project-visual{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.visual-karmkar{
+    background:
+        radial-gradient(circle at 70% 30%,rgba(216,255,69,.15),transparent 35%),
+        linear-gradient(135deg,#101010,#1a1a1a);
+}
+
+.visual-zanas{
+    background:
+        radial-gradient(circle at 30% 50%,rgba(160,100,40,.3),transparent 35%),
+        linear-gradient(135deg,#0b0907,#24170f);
+}
+
+.visual-ui{
+    width:75%;
+    height:72%;
+    background:#f1efe9;
+    color:#111;
+    box-shadow:0 30px 100px rgba(0,0,0,.5);
+    padding:25px;
+    transform:rotate(-2deg);
+}
+
+.ui-top{
+    height:10px;
+    width:100%;
+    background:#111;
+    margin-bottom:25px;
+}
+
+.ui-lines{
+    display:grid;
+    gap:10px;
+}
+
+.ui-lines div{
+    height:7px;
+    background:#ccc;
+}
+
+.ui-lines div:nth-child(1){
+    width:60%;
+    height:35px;
+    background:#111;
+}
+
+.ui-lines div:nth-child(2){
+    width:80%;
+}
+
+.ui-lines div:nth-child(3){
+    width:45%;
+}
+
+.ui-boxes{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:30px;
+}
+
+.ui-box{
+    height:120px;
+    background:#ddd;
+}
+
+.project-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-top:20px;
+    gap:20px;
+}
+
+.project-title{
+    font-size:clamp(28px,4vw,50px);
+    letter-spacing:-.05em;
+}
+
+.project-description{
+    max-width:330px;
+    color:#777;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.project-tags{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:15px;
+}
+
+.tag{
+    border:1px solid var(--line);
+    padding:7px 10px;
+    font-family:var(--mono);
+    font-size:9px;
+    text-transform:uppercase;
+}
+
+/* =========================================================
+   CASE STUDY
+========================================================= */
+
+.case-study{
+    border-top:1px solid var(--line);
+    padding-top:120px;
+}
+
+.case-layout{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:100px;
+}
+
+.case-label{
+    color:var(--accent);
+    margin-bottom:25px;
+}
+
+.case-heading{
+    font-size:clamp(40px,5vw,75px);
+    line-height:.95;
+    letter-spacing:-.07em;
+}
+
+.case-text{
+    color:#999;
+    line-height:1.8;
+    font-size:14px;
+}
+
+.case-list{
+    margin-top:50px;
+    border-top:1px solid var(--line);
+}
+
+.case-row{
+    display:grid;
+    grid-template-columns:120px 1fr;
+    padding:18px 0;
+    border-bottom:1px solid var(--line);
+    font-size:13px;
+}
+
+.case-row span:first-child{
+    color:#666;
+    font-family:var(--mono);
+    font-size:10px;
+}
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+.services{
+    border-top:1px solid var(--line);
+}
+
+.service{
+    display:grid;
+    grid-template-columns:100px 1fr auto;
+    align-items:center;
+    gap:40px;
+    border-bottom:1px solid var(--line);
+    padding:35px 0;
+}
+
+.service-number{
+    color:#555;
+    font-family:var(--mono);
+}
+
+.service-name{
+    font-size:clamp(28px,4vw,55px);
+    letter-spacing:-.05em;
+}
+
+.service-desc{
+    max-width:280px;
+    color:#777;
+    font-size:12px;
+    line-height:1.6;
+}
+
+.service-arrow{
+    color:var(--accent);
+    font-size:25px;
+}
+
+/* =========================================================
+   PROCESS
+========================================================= */
+
+.process-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--line);
+}
+
+.process{
+    padding:30px 25px 30px 0;
+    border-right:1px solid var(--line);
+    margin-right:25px;
+}
+
+.process:last-child{
+    border:0;
+}
+
+.process-num{
+    font-family:var(--mono);
+    color:var(--accent);
+    font-size:11px;
+}
+
+.process-title{
+    margin-top:60px;
+    font-size:25px;
+    letter-spacing:-.04em;
+}
+
+.process-text{
+    margin-top:15px;
+    color:#777;
+    font-size:12px;
+    line-height:1.7;
+}
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.cta{
+    min-height:80vh;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+}
+
+.cta-inner{
+    width:100%;
+    position:relative;
+}
+
+.cta-bg-text{
+    position:absolute;
+    font-size:clamp(100px,20vw,300px);
+    line-height:.7;
+    font-weight:700;
+    letter-spacing:-.1em;
+    color:#101010;
+    white-space:nowrap;
+    left:-5%;
+    top:50%;
+    transform:translateY(-50%);
+    pointer-events:none;
+}
+
+.cta-title{
+    position:relative;
+    z-index:2;
+    font-size:clamp(60px,10vw,150px);
+    line-height:.82;
+    letter-spacing:-.09em;
+    max-width:1000px;
+}
+
+.cta-title span{
+    color:var(--accent);
+}
+
+.cta-button{
+    position:relative;
+    z-index:2;
+    display:inline-flex;
+    margin-top:60px;
+    border:1px solid #444;
+    padding:20px 28px;
+    font-family:var(--mono);
+    font-size:11px;
+    text-transform:uppercase;
+    transition:.4s;
+}
+
+.cta-button:hover{
+    background:var(--accent);
+    color:#000;
+    border-color:var(--accent);
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    border-top:1px solid var(--line);
+    padding:35px 0;
+}
+
+.footer-inner{
+    display:flex;
+    justify-content:space-between;
+    gap:30px;
+    align-items:center;
+}
+
+.footer-links{
+    display:flex;
+    gap:25px;
+    font-family:var(--mono);
+    font-size:10px;
+    text-transform:uppercase;
+}
+
+.footer-copy{
+    color:#555;
+    font-family:var(--mono);
+    font-size:9px;
+}
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(50px);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:900px){
+
+    .container{
+        width:min(100% - 35px,1400px);
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .section{
+        padding:100px 0;
+    }
+
+    .section-header{
+        flex-direction:column;
+        margin-bottom:60px;
+    }
+
+    .about-layout,
+    .case-layout{
+        grid-template-columns:1fr;
+        gap:50px;
+    }
+
+    .about-stats{
+        margin-top:50px;
+    }
+
+    .project{
+        width:85vw;
+    }
+
+    .process-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .process{
+        border-bottom:1px solid var(--line);
+        padding-bottom:35px;
+        margin-bottom:25px;
+    }
+
+    .service{
+        grid-template-columns:50px 1fr auto;
+        gap:15px;
+    }
+
+    .service-desc{
+        display:none;
+    }
+
+    .hero-bottom{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .cursor{
+        display:none;
+    }
+}
+
+@media(max-width:600px){
+
+    .hero-title{
+        font-size:18vw;
+    }
+
+    .hero{
+        min-height:90svh;
+    }
+
+    .hero-bottom{
+        margin-top:45px;
+    }
+
+    .about-stats{
+        grid-template-columns:1fr;
+    }
+
+    .stat,
+    .stat:last-child{
+        border-right:0;
+        border-bottom:1px solid var(--line);
+        padding:20px 0;
+    }
+
+    .stat:last-child{
+        border-bottom:0;
+    }
+
+    .project{
+        width:88vw;
+    }
+
+    .project-meta{
+        flex-direction:column;
+    }
+
+    .project-description{
+        max-width:100%;
+    }
+
+    .case-row{
+        grid-template-columns:90px 1fr;
+    }
+
+    .process-grid{
+        grid-template-columns:1fr;
+    }
+
+    .process{
+        border-right:0;
+    }
+
+    .footer-inner{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .footer-links{
+        flex-wrap:wrap;
+    }
+
+    .loader{
+        padding:25px;
+    }
+}
+
+</style>
 </head>
 
 <body>
 
-  <!-- Background Glow -->
-  <div class="bg-blur"></div>
+<!-- =====================================================
+     LOADER
+===================================================== -->
 
-  <!-- Navbar -->
-  <nav>
-    <h2 class="logo">Shadma<span>.</span></h2>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#work">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#contact" class="btn-nav">Contact</a></li>
-    </ul>
-  </nav>
+<div class="loader">
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="hero-content">
-      <h1 class="reveal">
-        Crafting <span>Premium</span><br />
-        WordPress Experiences
-      </h1>
+    <div class="loader-counter">00</div>
 
-      <p class="reveal delay">
-        Senior WordPress Developer & UI Designer with 9+ years of expertise in
-        building fast, SEO-friendly, modern websites.
-      </p>
-
-      <div class="hero-buttons reveal delay2">
-        <a href="#work" class="btn-primary">View Work</a>
-        <a href="#contact" class="btn-outline">Hire Me</a>
-      </div>
+    <div class="loader-status">
+        INITIALISING EXPERIENCE...
     </div>
 
-    <div class="hero-card reveal delay3">
-      <h3>9+ Years Experience</h3>
-      <p>WordPress • Webflow • UI/UX • SEO</p>
-    </div>
-  </header>
+</div>
 
-  <!-- ABOUT -->
-  <section id="about" class="section">
-    <h2 class="section-title reveal">About Me</h2>
-    <p class="section-text reveal delay">
-      I’m <b>Shadma Masarin</b>, a Senior Web & WordPress Developer specializing in
-      modern portfolio websites, LMS platforms, WooCommerce stores, and premium UI systems.
-      My focus is performance, SEO, and world-class design standards.
-    </p>
-  </section>
 
-  <!-- PROJECTS -->
-  <section id="work" class="section">
-    <h2 class="section-title reveal">Featured Projects</h2>
+<!-- =====================================================
+     CURSOR
+===================================================== -->
 
-    <div class="grid">
+<div class="cursor"></div>
 
-      <div class="project-card reveal">
-        <h3>Interactive LMS Platform</h3>
-        <p>Assignment-driven LMS with custom workflows & dashboards.</p>
-        <span>WordPress + Forminator</span>
-      </div>
 
-      <div class="project-card reveal delay">
-        <h3>Healthcare Business Website</h3>
-        <p>Premium Webflow-style responsive site with SEO optimization.</p>
-        <span>UI/UX + Webflow</span>
-      </div>
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
 
-      <div class="project-card reveal delay2">
-        <h3>WooCommerce Store</h3>
-        <p>Modern eCommerce store with optimized checkout experience.</p>
-        <span>WooCommerce + Custom Theme</span>
-      </div>
+<nav class="nav">
+
+    <div class="container nav-inner">
+
+        <a href="#" class="logo">
+            SHADMA<span>●</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="#work">Work</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <a href="#contact" class="nav-cta">
+            Let's talk
+        </a>
 
     </div>
-  </section>
 
-  <!-- SKILLS -->
-  <section id="skills" class="section">
-    <h2 class="section-title reveal">Skills & Expertise</h2>
+</nav>
 
-    <div class="skills-grid">
 
-      <div class="skill reveal">WordPress Development</div>
-      <div class="skill reveal delay">Custom Themes & Plugins</div>
-      <div class="skill reveal delay2">PHP + WP APIs</div>
+<!-- =====================================================
+     HERO
+===================================================== -->
 
-      <div class="skill reveal">HTML5 • CSS3 • JavaScript</div>
-      <div class="skill reveal delay">SEO + Performance</div>
-      <div class="skill reveal delay2">UI/UX Design (Figma)</div>
+<header class="hero">
+
+    <div class="hero-grid"></div>
+
+    <div class="hero-orb"></div>
+
+    <div class="container hero-content">
+
+        <div class="hero-small mono reveal">
+            Independent Designer / Developer
+        </div>
+
+        <h1 class="hero-title">
+            DIGITAL<br>
+            <span class="outline">EXPERIENCES</span><br>
+            THAT WORK.
+        </h1>
+
+        <div class="hero-bottom">
+
+            <p class="hero-description reveal">
+                I design and build high-performance websites,
+                eCommerce experiences and digital systems for
+                businesses that want to look credible, convert
+                better and grow online.
+            </p>
+
+            <div class="scroll-indicator reveal">
+
+                <span>Scroll to explore</span>
+
+                <div class="scroll-line"></div>
+
+            </div>
+
+        </div>
 
     </div>
-  </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="section contact">
-    <h2 class="section-title reveal">Let’s Work Together</h2>
+</header>
 
-    <p class="section-text reveal delay">
-      Email me for freelance projects, WordPress development, or premium website design.
-    </p>
 
-    <a class="btn-primary reveal delay2" href="mailto:yourmail@gmail.com">
-      Contact Me
-    </a>
+<!-- =====================================================
+     MARQUEE
+===================================================== -->
 
-    <div class="social reveal delay3">
-      <a href="https://www.linkedin.com/in/shadmasarindesign">LinkedIn</a>
-      <a href="https://www.behance.net/shadmasarin">Behance</a>
+<div class="marquee">
+
+    <div class="marquee-track">
+
+        <div class="marquee-item">
+            WordPress <span>✦</span>
+        </div>
+
+        <div class="marquee-item">
+            UI / UX <span>✦</span>
+        </div>
+
+        <div class="marquee-item">
+            WooCommerce <span>✦</span>
+        </div>
+
+        <div class="marquee-item">
+            Development <span>✦</span>
+        </div>
+
+        <div class="marquee-item">
+            AI Automation <span>✦</span>
+        </div>
+
+        <div class="marquee-item">
+            Digital Strategy <span>✦</span>
+        </div>
+
+        <div class="marquee-item">
+            WordPress <span>✦</span>
+        </div>
+
+        <div class="marquee-item">
+            UI / UX <span>✦</span>
+        </div>
+
+        <div class="marquee-item">
+            WooCommerce <span>✦</span>
+        </div>
+
     </div>
-  </section>
 
-  <footer>
-    © 2026 Shadma Masarin — Premium Portfolio Website
-  </footer>
+</div>
 
-  <script src="script.js"></script>
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section class="section" id="about">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <div class="section-number mono">
+                01 / About
+            </div>
+
+            <p class="section-intro">
+                Strategy, design and development — without
+                unnecessary layers between the idea and the final product.
+            </p>
+
+        </div>
+
+        <div class="about-layout">
+
+            <div class="about-big reveal">
+
+                I don't just make websites
+                <span>look good.</span>
+
+                I build digital experiences
+                designed to work.
+
+            </div>
+
+            <div>
+
+                <div class="about-copy reveal">
+
+                    <p>
+                        I'm Shadma, an independent Web Designer,
+                        Developer and Digital Creative based in India,
+                        working with businesses and teams remotely.
+                    </p>
+
+                    <p>
+                        My work combines visual design, WordPress
+                        development, WooCommerce, conversion-focused
+                        UX and practical automation.
+                    </p>
+
+                    <p>
+                        From a first landing page to a complete
+                        learning platform or eCommerce system,
+                        I focus on creating websites that are
+                        visually distinctive while remaining fast,
+                        responsive and easy to manage.
+                    </p>
+
+                </div>
+
+                <div class="about-stats">
+
+                    <div class="stat reveal">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Years of creative experience</div>
+                    </div>
+
+                    <div class="stat reveal">
+                        <div class="stat-number">WP</div>
+                        <div class="stat-label">WordPress specialist</div>
+                    </div>
+
+                    <div class="stat reveal">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Ideas worth building</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SELECTED WORK
+===================================================== -->
+
+<section class="section work" id="work">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <div class="section-number mono">
+                02 / Selected Work
+            </div>
+
+            <p class="section-intro">
+                A selection of real-world digital products,
+                websites and systems I've designed and developed.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="projects">
+
+
+            <!-- PROJECT 01 -->
+
+            <article class="project">
+
+                <a href="#" class="project-image">
+
+                    <div class="project-visual visual-karmkar">
+
+                        <div class="visual-ui">
+
+                            <div class="ui-top"></div>
+
+                            <div class="ui-lines">
+
+                                <div></div>
+                                <div></div>
+                                <div></div>
+
+                            </div>
+
+                            <div class="ui-boxes">
+
+                                <div class="ui-box"></div>
+                                <div class="ui-box"></div>
+                                <div class="ui-box"></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+                <div class="project-meta">
+
+                    <div>
+
+                        <div class="mono muted">
+                            01 / 2026
+                        </div>
+
+                        <h2 class="project-title">
+                            Karmkar
+                        </h2>
+
+                        <div class="project-tags">
+
+                            <span class="tag">WordPress</span>
+                            <span class="tag">Tutor LMS</span>
+                            <span class="tag">WooCommerce</span>
+                            <span class="tag">Custom UX</span>
+
+                        </div>
+
+                    </div>
+
+                    <p class="project-description">
+
+                        A conversion-focused learning platform
+                        combining online courses, WooCommerce
+                        checkout, Tutor LMS and a custom
+                        mentor-feedback workflow.
+
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 02 -->
+
+            <article class="project">
+
+                <a href="#" class="project-image">
+
+                    <div class="project-visual visual-zanas">
+
+                        <div class="visual-ui">
+
+                            <div class="ui-top"></div>
+
+                            <div class="ui-lines">
+
+                                <div></div>
+                                <div></div>
+                                <div></div>
+
+                            </div>
+
+                            <div class="ui-boxes">
+
+                                <div class="ui-box"></div>
+                                <div class="ui-box"></div>
+                                <div class="ui-box"></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+                <div class="project-meta">
+
+                    <div>
+
+                        <div class="mono muted">
+                            02 / 2026
+                        </div>
+
+                        <h2 class="project-title">
+                            Zanas
+                        </h2>
+
+                        <div class="project-tags">
+
+                            <span class="tag">eCommerce</span>
+                            <span class="tag">WooCommerce</span>
+                            <span class="tag">UX</span>
+                            <span class="tag">Product Design</span>
+
+                        </div>
+
+                    </div>
+
+                    <p class="project-description">
+
+                        A premium leather products eCommerce
+                        experience designed to present handcrafted
+                        products with a stronger digital identity.
+
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 03 -->
+
+            <article class="project">
+
+                <a href="#" class="project-image">
+
+                    <div class="project-visual visual-karmkar">
+
+                        <div class="visual-ui">
+
+                            <div class="ui-top"></div>
+
+                            <div class="ui-lines">
+
+                                <div></div>
+                                <div></div>
+                                <div></div>
+
+                            </div>
+
+                            <div class="ui-boxes">
+
+                                <div class="ui-box"></div>
+                                <div class="ui-box"></div>
+                                <div class="ui-box"></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+                <div class="project-meta">
+
+                    <div>
+
+                        <div class="mono muted">
+                            03 / Selected Archive
+                        </div>
+
+                        <h2 class="project-title">
+                            Digital Systems
+                        </h2>
+
+                        <div class="project-tags">
+
+                            <span class="tag">UI / UX</span>
+                            <span class="tag">Automation</span>
+                            <span class="tag">WordPress</span>
+
+                        </div>
+
+                    </div>
+
+                    <p class="project-description">
+
+                        Custom digital workflows, dashboards,
+                        forms and automation systems designed
+                        to remove repetitive manual work.
+
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CASE STUDY
+===================================================== -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="case-study">
+
+            <div class="case-layout">
+
+                <div>
+
+                    <div class="case-label mono">
+                        Featured Case Study
+                    </div>
+
+                    <h2 class="case-heading">
+                        Turning a course website into a complete
+                        learning experience.
+                    </h2>
+
+                </div>
+
+                <div>
+
+                    <div class="case-text">
+
+                        Karmkar needed more than a conventional
+                        course website.
+
+                        The platform needed to connect course
+                        discovery, payments, student accounts,
+                        challenges, mentor feedback and course
+                        progression into one experience.
+
+                    </div>
+
+
+                    <div class="case-list">
+
+                        <div class="case-row">
+                            <span>ROLE</span>
+                            <strong>Design + Development</strong>
+                        </div>
+
+                        <div class="case-row">
+                            <span>STACK</span>
+                            <strong>WordPress / Tutor LMS / WooCommerce</strong>
+                        </div>
+
+                        <div class="case-row">
+                            <span>UX</span>
+                            <strong>Custom Student Workflow</strong>
+                        </div>
+
+                        <div class="case-row">
+                            <span>AUTOMATION</span>
+                            <strong>Assignments + Mentor Review</strong>
+                        </div>
+
+                        <div class="case-row">
+                            <span>TRACKING</span>
+                            <strong>Conversion & Meta Pixel Setup</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SERVICES
+===================================================== -->
+
+<section class="section services" id="services">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <div class="section-number mono">
+                03 / Services
+            </div>
+
+            <p class="section-intro">
+                Flexible enough for a focused landing page.
+                Experienced enough for a complete digital system.
+            </p>
+
+        </div>
+
+
+        <div class="service reveal">
+
+            <div class="service-number">01</div>
+
+            <div class="service-name">
+                Website Design
+            </div>
+
+            <div class="service-desc">
+                High-impact responsive websites built around
+                your brand, audience and business goals.
+            </div>
+
+            <div class="service-arrow">↗</div>
+
+        </div>
+
+
+        <div class="service reveal">
+
+            <div class="service-number">02</div>
+
+            <div class="service-name">
+                WordPress Development
+            </div>
+
+            <div class="service-desc">
+                Fast, scalable WordPress websites with
+                flexible content management.
+            </div>
+
+            <div class="service-arrow">↗</div>
+
+        </div>
+
+
+        <div class="service reveal">
+
+            <div class="service-number">03</div>
+
+            <div class="service-name">
+                eCommerce
+            </div>
+
+            <div class="service-desc">
+                WooCommerce stores with better product
+                presentation, UX and conversion journeys.
+            </div>
+
+            <div class="service-arrow">↗</div>
+
+        </div>
+
+
+        <div class="service reveal">
+
+            <div class="service-number">04</div>
+
+            <div class="service-name">
+                UI / UX
+            </div>
+
+            <div class="service-desc">
+                Interfaces that balance visual personality
+                with clarity and usability.
+            </div>
+
+            <div class="service-arrow">↗</div>
+
+        </div>
+
+
+        <div class="service reveal">
+
+            <div class="service-number">05</div>
+
+            <div class="service-name">
+                Automation
+            </div>
+
+            <div class="service-desc">
+                Practical automations that connect forms,
+                data, workflows and repetitive tasks.
+            </div>
+
+            <div class="service-arrow">↗</div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROCESS
+===================================================== -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <div class="section-number mono">
+                04 / Process
+            </div>
+
+            <p class="section-intro">
+                No mystery. No unnecessary meetings.
+                A clear process from idea to launch.
+            </p>
+
+        </div>
+
+
+        <div class="process-grid">
+
+            <div class="process reveal">
+
+                <div class="process-num">01</div>
+
+                <h3 class="process-title">
+                    Discover
+                </h3>
+
+                <p class="process-text">
+                    Understand the business, audience,
+                    competitors and actual problem.
+                </p>
+
+            </div>
+
+
+            <div class="process reveal">
+
+                <div class="process-num">02</div>
+
+                <h3 class="process-title">
+                    Design
+                </h3>
+
+                <p class="process-text">
+                    Create a visual direction and UX
+                    that makes the product feel distinctive.
+                </p>
+
+            </div>
+
+
+            <div class="process reveal">
+
+                <div class="process-num">03</div>
+
+                <h3 class="process-title">
+                    Build
+                </h3>
+
+                <p class="process-text">
+                    Develop responsive, optimised and
+                    manageable digital experiences.
+                </p>
+
+            </div>
+
+
+            <div class="process reveal">
+
+                <div class="process-num">04</div>
+
+                <h3 class="process-title">
+                    Launch
+                </h3>
+
+                <p class="process-text">
+                    Test, optimise, launch and hand over
+                    a system the client can actually use.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="section cta" id="contact">
+
+    <div class="container">
+
+        <div class="cta-inner">
+
+            <div class="cta-bg-text">
+                HELLO
+            </div>
+
+            <div class="mono muted">
+                Have a project in mind?
+            </div>
+
+            <h2 class="cta-title">
+                Let's build<br>
+                something <span>worth seeing.</span>
+            </h2>
+
+            <!-- CHANGE THIS EMAIL -->
+
+            <a
+                href="mailto:YOUR-EMAIL@example.com"
+                class="cta-button magnetic"
+            >
+                Start a conversation ↗
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="container footer-inner">
+
+        <div class="footer-copy">
+            © 2026 SHADMA — DESIGN / DEVELOPMENT
+        </div>
+
+        <div class="footer-links">
+
+            <!-- CHANGE THESE LINKS -->
+
+            <a href="https://www.linkedin.com/" target="_blank">
+                LinkedIn
+            </a>
+
+            <a href="https://www.instagram.com/" target="_blank">
+                Instagram
+            </a>
+
+            <a href="mailto:YOUR-EMAIL@example.com">
+                Email
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =====================================================
+     GSAP
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+
+
+<script>
+
+/* =========================================================
+   REGISTER GSAP
+========================================================= */
+
+gsap.registerPlugin(ScrollTrigger);
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+window.addEventListener("load", () => {
+
+    const counter = document.querySelector(".loader-counter");
+    const loader = document.querySelector(".loader");
+
+    let value = 0;
+
+    const interval = setInterval(() => {
+
+        value += Math.floor(Math.random() * 8) + 3;
+
+        if(value >= 100){
+
+            value = 100;
+
+            clearInterval(interval);
+
+            gsap.to(counter,{
+                opacity:0,
+                duration:.3
+            });
+
+            gsap.to(loader,{
+                yPercent:-100,
+                duration:1.2,
+                ease:"power4.inOut",
+                delay:.3,
+                onComplete:()=>{
+
+                    loader.style.display="none";
+
+                    startAnimations();
+
+                }
+            });
+
+        }
+
+        counter.textContent = String(value).padStart(2,"0");
+
+    },45);
+
+});
+
+
+/* =========================================================
+   MAIN ANIMATIONS
+========================================================= */
+
+function startAnimations(){
+
+    gsap.from(".hero-title",{
+
+        y:120,
+        opacity:0,
+        duration:1.5,
+        ease:"power4.out"
+
+    });
+
+
+    gsap.from(".hero-small",{
+
+        y:30,
+        opacity:0,
+        duration:1,
+        delay:.3
+
+    });
+
+
+    gsap.from(".hero-description",{
+
+        y:30,
+        opacity:0,
+        duration:1,
+        delay:.5
+
+    });
+
+
+    gsap.from(".scroll-indicator",{
+
+        opacity:0,
+        duration:1,
+        delay:.7
+
+    });
+
+
+    /* Orb */
+
+    gsap.to(".hero-orb",{
+
+        y:100,
+        x:-80,
+        scale:1.2,
+        duration:8,
+        ease:"sine.inOut",
+        repeat:-1,
+        yoyo:true
+
+    });
+
+
+    /* Hero parallax */
+
+    gsap.to(".hero-grid",{
+
+        yPercent:30,
+
+        scrollTrigger:{
+            trigger:".hero",
+            start:"top top",
+            end:"bottom top",
+            scrub:true
+        }
+
+    });
+
+
+    /* Reveal */
+
+    gsap.utils.toArray(".reveal").forEach(element=>{
+
+        gsap.fromTo(
+            element,
+            {
+                y:60,
+                opacity:0
+            },
+            {
+                y:0,
+                opacity:1,
+                duration:1,
+                ease:"power3.out",
+                scrollTrigger:{
+                    trigger:element,
+                    start:"top 88%",
+                    toggleActions:"play none none reverse"
+                }
+            }
+        );
+
+    });
+
+
+    /* Section titles */
+
+    gsap.utils.toArray(".section-title").forEach(title=>{
+
+        gsap.from(title,{
+
+            y:100,
+            opacity:0,
+            duration:1.2,
+
+            scrollTrigger:{
+                trigger:title,
+                start:"top 85%"
+            }
+
+        });
+
+    });
+
+
+    /* CTA */
+
+    gsap.to(".cta-bg-text",{
+
+        xPercent:-20,
+
+        scrollTrigger:{
+            trigger:".cta",
+            start:"top bottom",
+            end:"bottom top",
+            scrub:true
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+   HORIZONTAL PROJECT SCROLL
+========================================================= */
+
+const projects = document.querySelector(".projects");
+
+if(window.innerWidth > 900){
+
+    gsap.to(projects,{
+
+        x:()=>-(projects.scrollWidth-window.innerWidth+100),
+
+        ease:"none",
+
+        scrollTrigger:{
+
+            trigger:".work",
+
+            start:"top top",
+
+            end:()=>"+="+projects.scrollWidth,
+
+            pin:true,
+
+            scrub:1,
+
+            invalidateOnRefresh:true
+
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+   CUSTOM CURSOR
+========================================================= */
+
+const cursor = document.querySelector(".cursor");
+
+if(window.innerWidth > 900){
+
+    window.addEventListener("mousemove",e=>{
+
+        gsap.to(cursor,{
+
+            x:e.clientX,
+            y:e.clientY,
+            duration:.15,
+            ease:"power2.out"
+
+        });
+
+    });
+
+
+    document.querySelectorAll("a,button,.project").forEach(el=>{
+
+        el.addEventListener("mouseenter",()=>{
+
+            cursor.classList.add("active");
+
+        });
+
+        el.addEventListener("mouseleave",()=>{
+
+            cursor.classList.remove("active");
+
+        });
+
+    });
+
+}
+
+
+/* =========================================================
+   MAGNETIC BUTTON
+========================================================= */
+
+document.querySelectorAll(".magnetic").forEach(button=>{
+
+    button.addEventListener("mousemove",e=>{
+
+        const rect=button.getBoundingClientRect();
+
+        const x=e.clientX-rect.left-rect.width/2;
+        const y=e.clientY-rect.top-rect.height/2;
+
+        gsap.to(button,{
+
+            x:x*.2,
+            y:y*.2,
+            duration:.4,
+            ease:"power3.out"
+
+        });
+
+    });
+
+
+    button.addEventListener("mouseleave",()=>{
+
+        gsap.to(button,{
+
+            x:0,
+            y:0,
+            duration:.6,
+            ease:"elastic.out(1,.4)"
+
+        });
+
+    });
+
+});
+
+
+/* =========================================================
+   NAV BACKGROUND ON SCROLL
+========================================================= */
+
+ScrollTrigger.create({
+
+    start:"top -80",
+
+    onUpdate:self=>{
+
+        const nav=document.querySelector(".nav");
+
+        if(self.direction===1){
+
+            gsap.to(nav,{
+                yPercent:-100,
+                duration:.4
+            });
+
+        }else{
+
+            gsap.to(nav,{
+                yPercent:0,
+                duration:.4
+            });
+
+        }
+
+    }
+
+});
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+window.addEventListener("resize",()=>{
+
+    ScrollTrigger.refresh();
+
+});
+
+</script>
+
 </body>
 </html>
