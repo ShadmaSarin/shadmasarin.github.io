@@ -63,7 +63,7 @@ img{
     --line:rgba(255,255,255,.13);
     --accent:#d8ff45;
     --card:#111111;
-    --mono:"DM Mono",monospace;
+    --mono:"poppin",sans-serif;
 }
 
 /* =========================================================
@@ -83,13 +83,14 @@ img{
 
 .mono{
     font-family:var(--mono);
-    font-size:11px;
+    font-size:15px;
     letter-spacing:.08em;
     text-transform:uppercase;
 }
 
 .muted{
     color:var(--muted);
+    padding-bottom: 20px;
 }
 
 .section{
@@ -266,6 +267,7 @@ img{
     align-items:center;
     position:relative;
     overflow:hidden;
+    padding-top: 150px;
 }
 
 .hero-grid{
@@ -330,7 +332,7 @@ img{
     max-width:420px;
     font-size:15px;
     line-height:1.7;
-    color:#aaa;
+    color:#aaa;    
 }
 
 .scroll-indicator{
@@ -438,7 +440,7 @@ img{
 }
 
 .stat{
-    padding:25px 20px 25px 0;
+    padding:25px 20px 25px 20px;
     border-right:1px solid var(--line);
 }
 
@@ -466,6 +468,7 @@ img{
 
 .work{
     overflow:hidden;
+    padding-bottom: 600px;
 }
 
 .projects{
@@ -656,7 +659,7 @@ img{
 }
 
 .case-row span:first-child{
-    color:#666;
+    color:var(--accent);
     font-family:var(--mono);
     font-size:10px;
 }
@@ -679,7 +682,7 @@ img{
 }
 
 .service-number{
-    color:#555;
+    color:#888484;
     font-family:var(--mono);
 }
 
@@ -691,7 +694,7 @@ img{
 .service-desc{
     max-width:280px;
     color:#777;
-    font-size:12px;
+    font-size:13px;
     line-height:1.6;
 }
 
@@ -821,14 +824,14 @@ footer{
     display:flex;
     gap:25px;
     font-family:var(--mono);
-    font-size:10px;
+    font-size:12px;
     text-transform:uppercase;
 }
 
 .footer-copy{
-    color:#555;
+    color:#888484;
     font-family:var(--mono);
-    font-size:9px;
+    font-size: 12px;
 }
 
 /* =========================================================
@@ -836,8 +839,9 @@ footer{
 ========================================================= */
 
 .reveal{
-    opacity:0;
-    transform:translateY(50px);
+    /* opacity:0;
+    transform:translateY(50px); */
+    padding-bottom: 20px;
 }
 
 /* =========================================================
@@ -1339,7 +1343,7 @@ footer{
 
                             <div class="ui-lines">
 
-                                <div></div>
+                                <div>Karmkar</div>
                                 <div></div>
                                 <div></div>
 
@@ -1857,7 +1861,7 @@ footer{
             <!-- CHANGE THIS EMAIL -->
 
             <a
-                href="mailto:YOUR-EMAIL@example.com"
+                href="mailto:shadjob14@gmail.com"
                 class="cta-button magnetic"
             >
                 Start a conversation ↗
@@ -1890,11 +1894,11 @@ footer{
                 LinkedIn
             </a>
 
-            <a href="https://www.instagram.com/" target="_blank">
-                Instagram
+            <a href="https://www.behance.net/shadmasarin/" target="_blank">
+                Behance
             </a>
 
-            <a href="mailto:YOUR-EMAIL@example.com">
+            <a href="mailto:shadjob14@gmail.com">
                 Email
             </a>
 
@@ -2132,7 +2136,7 @@ if(window.innerWidth > 900){
 
             start:"top top",
 
-            end:()=>"+="+projects.scrollWidth,
+            end: () => "+=" + (projects.scrollWidth + 300),
 
             pin:true,
 
